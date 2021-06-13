@@ -3,6 +3,9 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app_ctse/login.dart';
 import 'package:splashscreen/splashscreen.dart';
+import '/movie_details_screen.dart';
+import '/dashboard_screen.dart';
+import 'package:flutter/material.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,27 +16,46 @@ Future<void> main() async {
   ));
 }
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => new _MyAppState();
-}
+// class MyApp extends StatefulWidget {
+//   @override
+//   _MyAppState createState() => new _MyAppState();
+// }
 
-class _MyAppState extends State<MyApp> {
+// class _MyAppState extends State<MyApp> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return new SplashScreen(
+//         seconds: 5,
+//         navigateAfterSeconds: new LoginPage(),
+//         title: new Text('Welcome In Movie App',
+//           style: new TextStyle(
+//               fontWeight: FontWeight.bold,
+//               fontSize: 20.0
+//           ),),
+//         image: new Image.asset('images/movie_icon.png'),
+//         backgroundColor: Colors.white,
+//         styleTextUnderTheLoader: new TextStyle(),
+//         photoSize: 100.0,
+//         loaderColor: Colors.red
+//     );
+//   }
+// }
+
+
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new SplashScreen(
-        seconds: 5,
-        navigateAfterSeconds: new LoginPage(),
-        title: new Text('Welcome In Movie App',
-          style: new TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20.0
-          ),),
-        image: new Image.asset('images/movie_icon.png'),
-        backgroundColor: Colors.white,
-        styleTextUnderTheLoader: new TextStyle(),
-        photoSize: 100.0,
-        loaderColor: Colors.red
+    return MaterialApp(
+      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.indigo,
+        scaffoldBackgroundColor: Colors.white,
+      ),
+      home: DashboardScreen(),
+      routes: {
+        MovieDetailsScreen.routeName: (ctx) => MovieDetailsScreen(),
+      },
     );
   }
 }
