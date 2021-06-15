@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/movie.dart';
-import '/movie_details_screen.dart';
+import '/movie_about.dart';
 
 class TopRatedListItem extends StatelessWidget {
   final int index;

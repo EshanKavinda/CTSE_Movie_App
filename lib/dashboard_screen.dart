@@ -2,13 +2,20 @@ import 'package:flutter/material.dart';
 
 import '../models/movie.dart';
 
-import '../widget/top_rated_list_item.dart';
-import '../widget/vertical_list_item.dart';
-import '../widget/horizontal_list_item.dart';
+import '../widget/top_rated_list_widget.dart';
+import '../widget/vertical_list_widget.dart';
+import '../widget/horizontal_list_widget.dart';
+import 'models/user.dart';
 
 class DashboardScreen extends StatelessWidget {
+  BuildContext _ctx;
+  final AppUser user;
+  DashboardScreen({Key key, @required this.user}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    _ctx = context;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Movies App'),

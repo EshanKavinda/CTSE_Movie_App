@@ -5,6 +5,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:movie_app_ctse/register.dart';
 
 import 'home.dart';
+import 'movie_about.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -118,7 +119,9 @@ class _LoginPageState extends State<LoginPage> implements LoginPageStatus {
           context,
           MaterialPageRoute(
             builder: (context) => HomePage(user: user,),
-          ));
+            // MovieDetailsScreen.routeName: (ctx) => MovieDetailsScreen(),
+
+    ));
     }else{
       _showSnackBar("Error");
     }

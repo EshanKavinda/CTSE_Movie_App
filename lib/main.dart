@@ -3,7 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app_ctse/login.dart';
 import 'package:splashscreen/splashscreen.dart';
-import '/movie_details_screen.dart';
+import '/movie_about.dart';
 import '/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 
