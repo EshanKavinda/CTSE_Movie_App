@@ -110,13 +110,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           const Radius.circular(10.0),
                         ),
                       ),
-                      labelText: "Weight"),
+                      labelText: "Mobile Number"),
                   validator: (value) {
                     if (value.isEmpty) {
-                      return 'Please enter your weight';
-                    } else if (int.parse(value) >= 150 ||
-                        int.parse(value) < 20) {
-                      return 'Your weight should be between 20 - 150';
+                      return 'Please enter your mobile number';
                     }
                     return null;
                   },

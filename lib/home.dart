@@ -58,8 +58,9 @@ class HomePage extends StatelessWidget {
                   SizedBox(
                     height: 120,
                   ),
+                  welcomeTxt,
                   Text(
-                    "My Menu",
+                    "Admin Dashboard",
                     style: TextStyle(
                       fontSize: 24.0,
                     ),
@@ -105,7 +106,7 @@ class HomePage extends StatelessWidget {
                           minWidth: 240,
                           padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                           child: Text(
-                            "View Movies",
+                            "Edit Movies",
                             style: TextStyle(
                               fontSize: 16,
                             ),
@@ -126,7 +127,7 @@ class HomePage extends StatelessWidget {
                           minWidth: 240,
                           padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                           child: Text(
-                            "Dashboard",
+                            "HOME",
                             style: TextStyle(
                               fontSize: 16,
                             ),
