@@ -6,6 +6,7 @@ import 'package:movie_app_ctse/register.dart';
 
 import 'home.dart';
 
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => new _LoginPageState();
@@ -31,20 +32,28 @@ class _LoginPageState extends State<LoginPage> implements LoginPageStatus {
     _ctx = context;
     //login button
     var loginBtn = new ElevatedButton(
-      style: ButtonStyle(
-        //set padding Left,Top, Right and Bottom
-        padding: MaterialStateProperty.all(EdgeInsets.fromLTRB(40.0, 10.0, 40.0, 10.0)),
-        //set background colour
-        backgroundColor: MaterialStateProperty.all(Colors.green),
+      style: ElevatedButton.styleFrom(
+        primary: Colors.green,
+        onPrimary: Colors.white,
+        shadowColor: Colors.greenAccent,
+        elevation: 3,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(32.0)),
+        minimumSize: Size(300, 50), //////// HERE
       ),
       onPressed: _submitLogin,
       child: new Text("Login"),
     );
     //register button
     var registerBtn = new ElevatedButton(
-      style: ButtonStyle(
-        padding: MaterialStateProperty.all(EdgeInsets.fromLTRB(26.0, 10.0, 26.0, 10.0)),
-        backgroundColor: MaterialStateProperty.all(Colors.deepOrange),
+      style: ElevatedButton.styleFrom(
+        primary: Colors.redAccent,
+        onPrimary: Colors.white,
+        shadowColor: Colors.greenAccent,
+        elevation: 3,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(32.0)),
+        minimumSize: Size(300, 50), //////// HERE
       ),
       onPressed: _register,
       child: new Text("Register"),
@@ -52,6 +61,7 @@ class _LoginPageState extends State<LoginPage> implements LoginPageStatus {
     var loginForm = new Column(
       //Set Alingment
       crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         //create login form
         new Form(
@@ -63,7 +73,13 @@ class _LoginPageState extends State<LoginPage> implements LoginPageStatus {
                 padding: const EdgeInsets.all(20.0),
                 child: new TextFormField(
                   onSaved: (val) => _email = val,
-                  decoration: new InputDecoration(labelText: "Email"),
+                  decoration: new InputDecoration(
+                      border: new OutlineInputBorder(
+                        borderRadius: const BorderRadius.all(
+                          const Radius.circular(10.0),
+                        ),
+                      ),
+                      labelText: "Email"),
                 ),
               ),
               new Padding(
@@ -72,30 +88,42 @@ class _LoginPageState extends State<LoginPage> implements LoginPageStatus {
                 child: new TextFormField(
                   obscureText: true,
                   onSaved: (val) => _password = val,
-                  decoration: new InputDecoration(labelText: "Password"),
+                  decoration: new InputDecoration(
+                      border: new OutlineInputBorder(
+                        borderRadius: const BorderRadius.all(
+                          const Radius.circular(10.0),
+                        ),
+                      ),
+                      labelText: "Password"),
                 ),
               )
             ],
           ),
         ),
-        new Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: loginBtn),
+        new Padding(padding: const EdgeInsets.all(10.0), child: loginBtn),
         registerBtn
       ],
     );
 
-    return new Scaffold(
-      //title bar
-      appBar: new AppBar(
-        title: new Text("Login"),
-      ),
-      key: scaffoldKey,
-      //Create scroll view
-      body: new SingleChildScrollView(
-        child: new Container(
-          child: new Center(
-            child: loginForm,
+    return Container(
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Colors.blueGrey, Colors.white10])),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: new AppBar(
+          title: new Text("             Login"),
+          backgroundColor: Colors.blueGrey,
+        ),
+        key: scaffoldKey,
+        //Create scroll view
+        body: new SingleChildScrollView(
+          child: new Container(
+            child: new Center(
+              child: loginForm,
+            ),
           ),
         ),
       ),
@@ -112,14 +140,17 @@ class _LoginPageState extends State<LoginPage> implements LoginPageStatus {
   //Login success method
   @override
   void onLoginSuccess(AppUser user) async {
-    if(user.flaglogged == "logged"){
+    if (user.flaglogged == "logged") {
       _showSnackBar("Logged..");
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => HomePage(user: user,),
+            builder: (context) => HomePage(
+              user: user,
+            ),
+            // MovieDetailsScreen.routeName: (ctx) => MovieDetailsScreen(),
           ));
-    }else{
+    } else {
       _showSnackBar("Error");
     }
   }
@@ -152,11 +183,11 @@ class _LoginPageState extends State<LoginPage> implements LoginPageStatus {
       content: new Text(text),
     ));
   }
-
 }
 
+
 //Login page status methods
-abstract class LoginPageStatus{
+abstract class LoginPageStatus {
   void onLoginSuccess(AppUser user);
   void onLoginError(String error);
 }
@@ -168,22 +199,24 @@ class LoginPageHandler {
 
   //login method
   doLogin(String useremail, String password) async {
-
     try {
       //create firebase auth instance
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: useremail,
-          password: password
-      );
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: useremail, password: password);
       //check user status
       if (userCredential != null) {
         //Create realtime database referance
         final databaseRef = FirebaseDatabase.instance.reference();
         //read firebase realtime data
-        databaseRef.child('users').orderByChild("email").equalTo(useremail).once().then((DataSnapshot snapshot) {
+        databaseRef
+            .child('users')
+            .orderByChild("email")
+            .equalTo(useremail)
+            .once()
+            .then((DataSnapshot snapshot) {
           print('Data : ${snapshot.value}');
           //Map data snapshot
-          Map <dynamic, dynamic> values = snapshot.value;
+          Map<dynamic, dynamic> values = snapshot.value;
           values.forEach((key, values) {
             var name = values["name"].toString();
             var email = values["email"].toString();
@@ -191,7 +224,8 @@ class LoginPageHandler {
             var age = values["age"].toString();
             var weight = values["weight"].toString();
             //Create user object
-            AppUser user = AppUser.name(name, email, null, weight, gender, age, "logged");
+            AppUser user =
+            AppUser.name(name, email, null, weight, gender, age, "logged");
             _view.onLoginSuccess(user);
           });
         });
@@ -207,5 +241,4 @@ class LoginPageHandler {
       }
     }
   }
-
 }

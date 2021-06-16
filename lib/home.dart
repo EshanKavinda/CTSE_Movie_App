@@ -1,10 +1,10 @@
-import 'dart:async';
-import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:movie_app_ctse/addMovie.dart';
+import 'package:movie_app_ctse/dashboard_screen.dart';
 import 'package:movie_app_ctse/play_page.dart';
+import 'package:movie_app_ctse/viewMovies.dart';
 
 import 'models/clips.dart';
 import 'models/user.dart';
@@ -46,19 +46,99 @@ class HomePage extends StatelessWidget {
       child: new Text("Welcome ${user.name}",),
     );
 
-    return new Scaffold(
-      appBar: AppBar(
-        title: Text("Home Page"),
-      ),
-      body: new Container(
-        child: new Center(
-          child: Column(
+    return Scaffold(
+      body: SafeArea(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[welcomeTxt, menuBtn, btn1, btn2],
-          ),
-        ),
-      ),
+            children: <Widget>[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(
+                    height: 120,
+                  ),
+                  Text(
+                    "My Menu",
+                    style: TextStyle(
+                      fontSize: 24.0,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        MaterialButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(32)),
+                              side: BorderSide(color: Colors.black45, width: 1)),
+                          color: Colors.white,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute(builder: (context) => AddMoviePage()),
+                            );
+                          },
+                          minWidth: 240,
+                          padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                          child: Text(
+                            "Add Movies",
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        MaterialButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(32)),
+                              side: BorderSide(color: Colors.black45, width: 1)),
+                          color: Colors.white,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute(builder: (context) => ViewMoviesScreen()),
+                            );
+                          },
+                          minWidth: 240,
+                          padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                          child: Text(
+                            "View Movies",
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        MaterialButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(32)),
+                              side: BorderSide(color: Colors.black45, width: 1)),
+                          color: Colors.white,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute(builder: (context) => DashboardScreen()),
+                            );
+                          },
+                          minWidth: 240,
+                          padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                          child: Text(
+                            "Dashboard",
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          )),
     );
   }
   //----UI End----//

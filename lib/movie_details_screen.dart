@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app_ctse/models/movie.dart';
 
 class MovieDetailsScreen extends StatelessWidget {
   static const routeName = '/movie-details';
@@ -6,7 +7,7 @@ class MovieDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final routeArgs =
-        ModalRoute.of(context).settings.arguments as Map<String, String>;
+        ModalRoute.of(context).settings.arguments as Map<String, dynamic>;
     final id = routeArgs['id'];
     final rating = routeArgs['rating'];
 

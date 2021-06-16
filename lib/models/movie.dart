@@ -18,7 +18,7 @@ class Movie {
   });
 }
 
-final movieList = [
+final recommendedMovies4567 = [
   Movie(
     id: 'tt4154796',
     title: 'Avengers: Endgame',
@@ -137,7 +137,7 @@ final bestMovieList = [
     id: 'tt0437086',
     title: 'Alita: Battle Angel',
     imageUrl: 'https://m.media-amazon.com/images/M/MV5BNzVhMjcxYjYtOTVhOS00MzQ1LWFiNTAtZmY2ZmJjNjIxMjllXkEyXkFqcGdeQXVyNTc5OTMwOTQ@._V1_SX300.jpg',
-    description: 'A deactivated cyborg is revived, but cannot remember anything of her past life and goes on a quest to find out who she is.',
+    description: 'A deactivated cyborg is revived, but cannot remember anything ',
     rating: '7.4',
     year: '2019',
     duration: '122 min'
@@ -146,7 +146,7 @@ final bestMovieList = [
     id: 'tt6320628',
     title: 'Spider-Man: Far from Home',
     imageUrl: 'https://m.media-amazon.com/images/M/MV5BMGZlNTY1ZWUtYTMzNC00ZjUyLWE0MjQtMTMxN2E3ODYxMWVmXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_SX300.jpg',
-    description: 'Following the events of Avengers: Endgame (2019), Spider-Man must step up to take on new threats in a world that has changed forever.',
+    description: 'Following the events of Avengers: Endgame (2019), Spider-Man ',
     rating: '7.7',
     year: '2019',
     duration: '129 min'
@@ -155,7 +155,7 @@ final bestMovieList = [
     id: 'tt1979376',
     title: 'Toy Story 4',
     imageUrl: 'https://m.media-amazon.com/images/M/MV5BMTYzMDM4NzkxOV5BMl5BanBnXkFtZTgwNzM1Mzg2NzM@._V1_SX300.jpg',
-    description: 'When a new toy called \"Forky\" joins Woody and the gang, a road trip alongside old and new friends reveals how big the world can be for a toy.',
+    description: 'When a new toy called \"Forky\" joins Woody and the ',
     rating: '8.1',
     year: '2019',
     duration: '100 min'

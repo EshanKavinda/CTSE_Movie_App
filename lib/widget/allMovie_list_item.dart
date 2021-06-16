@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app_ctse/editMovies.dart';
 import 'package:movie_app_ctse/models/movie.dart';
 import '../movie_details_screen.dart';
+import '../viewMovies.dart';
 
 
-class VerticalListItem extends StatelessWidget {
+class AllMoviesListItem extends StatelessWidget {
   final int index;
-  VerticalListItem(this.index);
+  AllMoviesListItem(this.index);
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +18,15 @@ class VerticalListItem extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 Navigator.of(context).pushNamed(
-                  MovieDetailsScreen.routeName,
+                  EditMoviePage.editRouteName,
                   arguments: {
-                    'id': bestMovieList[index].id,
-                    'title': bestMovieList[index].title,
-                    'imageUrl': bestMovieList[index].imageUrl,
-                    'description': bestMovieList[index].description,
-                    'rating': bestMovieList[index].rating,
-                    'year': bestMovieList[index].year,
-                    'duration': bestMovieList[index].duration,
+                    'id': allMoviesArray[index].id,
+                    'title': allMoviesArray[index].title,
+                    'imageUrl': allMoviesArray[index].imageUrl,
+                    'description': allMoviesArray[index].description,
+                    'rating': allMoviesArray[index].rating,
+                    'year': allMoviesArray[index].year,
+                    'duration': allMoviesArray[index].duration,
                   },
                 );
               },
@@ -33,7 +35,7 @@ class VerticalListItem extends StatelessWidget {
                 child: Row(
                   children: <Widget>[
                     Hero(
-                      tag: bestMovieList[index].id,
+                      tag: allMoviesArray[index].id,
                       child: Container(
                         height: 150,
                         width: 100,
@@ -45,7 +47,7 @@ class VerticalListItem extends StatelessWidget {
                           image: DecorationImage(
                             fit: BoxFit.cover,
                             image: NetworkImage(
-                              bestMovieList[index].imageUrl,
+                              allMoviesArray[index].imageUrl,
                             ),
                           ),
                         ),
@@ -58,7 +60,7 @@ class VerticalListItem extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            bestMovieList[index].title,
+                            allMoviesArray[index].title,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -70,7 +72,7 @@ class VerticalListItem extends StatelessWidget {
                           Container(
                             width: 240,
                             child: Text(
-                              bestMovieList[index].description,
+                              allMoviesArray[index].description,
                             ),
                           ),
                         ],

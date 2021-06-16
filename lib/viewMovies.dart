@@ -1,19 +1,17 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_app_ctse/widget/horizontal_list_item.dart';
-import 'package:movie_app_ctse/widget/top_rated_list_item.dart';
-import 'package:movie_app_ctse/widget/vertical_list_item.dart';
+import 'package:movie_app_ctse/widget/allMovie_list_item.dart';
 import 'login.dart';
 import 'models/movie.dart';
 
-List<Movie> recommendedMovies = [];
+List<Movie> allMoviesArray = [];
 
-class DashboardScreen extends StatefulWidget {
+class ViewMoviesScreen extends StatefulWidget {
   @override
-  _DashboardScreenState createState() => _DashboardScreenState();
+  _ViewMoviesScreenState createState() => _ViewMoviesScreenState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen> {
+class _ViewMoviesScreenState extends State<ViewMoviesScreen> {
   DatabaseReference _movieRef;
 
   @override
@@ -28,10 +26,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
 
   fetchMovies() async {
-    recommendedMovies.clear();
-   await _movieRef.orderByChild("type")
-        .equalTo("recommended")
-        .once()
+    allMoviesArray.clear();
+    await _movieRef.once()
         .then((DataSnapshot snapshot) async {
       print('Data : ${snapshot.value}');
       Map <dynamic, dynamic> values = snapshot.value;
@@ -43,7 +39,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         var rating = values["rating"].toString();
         var year = values["year"].toString();
         var imageUri = values["imageUri"].toString();
-        recommendedMovies.add(new Movie(
+        allMoviesArray.add(new Movie(
             id: id,
             title: title,
             imageUrl: imageUri,
@@ -56,7 +52,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
     });
 
     setState(() {
-      print('********Length :${recommendedMovies.length}');
+      print('********Length :${allMoviesArray.length}');
+      // allMoviesArray = List.from(bestMovieList);
     });
 
   }
@@ -82,47 +79,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text(
-                    'Recommended',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  FlatButton(
-                    child: Text('View All'),
-                    onPressed: () {},
-                  ),
                 ],
               ),
-            ),
-            Container(
-              height: 280,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: recommendedMovies.length,
-                itemBuilder: (ctx, i) => HorizontalListItem(i),
-              ),
-            ),
-            SizedBox(
-              height: 30,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text(
-                    'Best of 2019',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  FlatButton(
-                    child: Text('View All'),
-                    onPressed: () {},
-                  ),
                 ],
               ),
             ),
@@ -131,38 +95,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: bestMovieList.length,
-                itemBuilder: (ctx, i) => VerticalListItem(i),
+                itemCount: allMoviesArray.length,
+                itemBuilder: (ctx, i) => AllMoviesListItem(i),
               ),
             ),
             SizedBox(height: 30,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    'Top Rated Movies',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  FlatButton(
-                    child: Text('View All'),
-                    onPressed: () {},
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              height: 280,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: topRatedMovieList.length,
-                itemBuilder: (ctx, i) => TopRatedListItem(i),
-              ),
-            ),
           ],
         ),
       ),
@@ -180,9 +117,4 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
     );
   }
-
-
-
-
-
 }
